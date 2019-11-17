@@ -10,3 +10,5 @@
 //     replaceText(`${type}-version`, process.versions[type])
 //   }
 // })
+
+window.python = require('child_process').spawn('python', ['./hello.py']);

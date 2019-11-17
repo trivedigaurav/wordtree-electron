@@ -5,9 +5,9 @@ function getSentenceStats() {
 function updateSentenceStats(matches){
 	total = data.total;
   	percentange = 100*matches/total;
-  	console.log("Documents included: "+ 
+  	$("#bottombar").html("Documents included: "+ 
                             matches+"/"+total+
-                            " ( "+percentange.toFixed(2)+"% ) ");
+                            " ("+percentange.toFixed(2)+"%) ");
 }
 
 function updateFeedback(selected, root){

@@ -12,9 +12,14 @@ text.selected{
 	fill:#B35522;
 }
 
-.node {
-  font: 10px sans-serif;
+body {
+  font: 12px sans-serif;
 }
+
+.node {
+  font-size: 10px;
+}
+
 
 .link {
   fill: none;
@@ -45,4 +50,25 @@ text.negative{
 
 text.positive .negative{
   fill: green;
+}
+
+#searchbar {
+    position:fixed;
+    width:100%; 
+}
+
+#bottombar {
+    position:fixed;
+    width:100%; 
+    left:0px;
+    padding: 5px;
+    bottom:0px;
+}
+
+#searchbar input{
+    width: 200px;
+}
+
+#word-tree {
+  padding-top:20px;
 }
