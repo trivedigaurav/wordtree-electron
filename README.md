@@ -1,4 +1,5 @@
 # wordtree-electron
+Simple GUI to explore wordtrees.
 
 ## To Use
 
@@ -16,3 +17,10 @@ npm start
 ```
 
 Note: If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/) or use `node` from the command prompt.
+
+## Builds on 
+
+This code builds upon [wordtree-python-cmd](https://github.com/trivedigaurav/wordtree-python-cmd).
+
+## Warning!
+This tool is for exploration only. Do not use in production.
