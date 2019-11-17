@@ -11,4 +11,4 @@
 //   }
 // })
 
-window.python = require('child_process').spawn('python', ['./hello.py']);
+window.spawn = require("child_process").spawn;

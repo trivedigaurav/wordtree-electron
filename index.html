@@ -8,16 +8,14 @@
   <body>
 
     <div id="searchbar">
-      <form onSubmit="return newSearch()"> 
-        <input type="search" placeholder="Enter root word..."> 
+      <form action="#" onSubmit="return newSearch()"> 
+        <input id="root-search" type="search" placeholder="Enter root word..."> 
       </form>
     </div>
 
     <div id="word-tree"></div>
 
-    <div id="bottombar">
-      Loading wordtree...
-    </div>
+    <div id="bottombar"></div>
 
     <!-- You can also require other files to run in this process -->
     <script src="./renderer.js"></script>
@@ -33,13 +31,5 @@
 
     <script>if (window.module) module = window.module;</script>
 
-    <script>
-
-      $(document).ready(function(){
-        makeWordTree();
-        getSentenceStats();
-      });
-
-    </script>
   </body>
 </html>
