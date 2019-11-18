@@ -28,11 +28,11 @@ def doSplit(root, inFile="docList.txt"):
 
     for filename in filelist:
 
-        # print filename
-        filename = os.path.abspath(filename.rstrip("\r\n"))
-        # print filename
+        path = filename.decode("utf-8") 
+        path = path.strip("\n\r")
+        file = os.path.abspath(path)
 
-        f = open(filename, 'r')
+        f = open(file, 'r')
         try:
             docid += 1
 
@@ -117,7 +117,7 @@ def writeFile(data, prefix, outFile="sample"):
 
     global debug
     
-    print json.dumps(data)
+    sys.stdout.write(json.dumps(data))
 
     sys.stdout.flush()
 
@@ -133,11 +133,11 @@ def main(argv):
     try:
         opts, args = getopt.getopt(argv, "hdi:w:o:", ["ifile"])
     except getopt.GetoptError:
-        print usage
+        sys.stdout.write(usage)
         sys.exit(2)
     for opt, arg in opts:
         if opt in ["-h", "--help"]:
-            print usage
+            sys.stdout.write(usage)
             sys.exit(0)
         elif opt in ("-i", "--infile"):
             inFile = os.path.abspath(arg)
@@ -149,7 +149,7 @@ def main(argv):
             outFile = arg
 
     if (not root or not inFile):
-        print usage
+        sys.stdout.write(usage)
         sys.exit(2)
 
     if (not outFile):
