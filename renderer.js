@@ -31,7 +31,7 @@ document.addEventListener('drop', (e) => {
     e.stopPropagation();
 
     for (const f of e.dataTransfer.files) {
-      alert('File(s) you dragged here: ', f.path)
+      alert('Using file: ' + f.path)
       csvfile = f.path;
     }
   });
