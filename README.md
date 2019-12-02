@@ -5,6 +5,8 @@ Simple GUI to explore wordtrees.
 
 To clone and run this repository you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. Currently, the project calls the python script from [wordtree-python-cmd](https://github.com/trivedigaurav/wordtree-python-cmd) to generate the wordtree. You need to have python on your system.
 
+By default, the tool load [lorem.csv](lorem.csv) to build trees on. You can drag and drop other similarly formatted files to analyze your text with the tool.
+
 
 From your command line:
 
