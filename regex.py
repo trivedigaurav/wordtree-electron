@@ -1,23 +1,16 @@
 import re
 import os, getopt, sys
 import json
+import csv
 
 debug = False
 
-def doSplit(root, inFile="docList.txt"):
+def doSplit(root, inFile="lorem.csv"):
     global debug
 
     if (not root):
         # print "Error: No root word provided!"
         return
-
-    f = open(inFile, "rb")
-    try:
-        filelist = f.readlines()
-    finally:
-        f.close()
-    
-    total = len(filelist)
     # print "Searching for", '"'+root+'"', "in" , total, "files." 
  
     phrases = []
@@ -26,18 +19,15 @@ def doSplit(root, inFile="docList.txt"):
     docid = 0
     sentenceid = 0
 
-    for filename in filelist:
+    with open(inFile, 'r') as csvfile:
+        csvreader = csv.reader(csvfile)
+        next(csvreader)
 
-        path = filename.decode("utf-8") 
-        path = path.strip("\n\r")
-        file = os.path.abspath(path)
-
-        f = open(file, 'r')
-        try:
+        for row in csvreader:
             docid += 1
+            
+            report = row[0].replace("\r\n", "\n")
 
-            report = f.read()
-            report = report.replace("\r\n", "\n")
             regex = r"([^.:]*?"+root+"[^.\n]*\.)"
 
             matches = re.findall(regex, report)
@@ -50,13 +40,9 @@ def doSplit(root, inFile="docList.txt"):
             for match in matches:
                 sentenceid += 1
                 phrases.append({"doc": docid, "id": sentenceid, "sentence": match})
-        finally:
-            f.close()
-          
-    
-    # print phrases
 
     tree = []
+
     for key in phrases:
         p = key['sentence']
         p = p.replace("\' s", "'s")
@@ -71,13 +57,13 @@ def doSplit(root, inFile="docList.txt"):
 
         tree.append({"left": left, "right": right, "doc": key["doc"], "id": key["id"]})
 
-    # if(debug):
-        # for node in tree:
-            # print node['left'], "-", root, "-", node['right']
+    # # if(debug):
+    #     # for node in tree:
+    #         # print node['left'], "-", root, "-", node['right']
 
-    # print "Documents included: ", count, "/", total, "(", round(100.0 * count / total, 2), "% )"
+    # # print "Documents included: ", count, "/", total, "(", round(100.0 * count / total, 2), "% )"
 
-    return (tree,count,total)
+    return (tree,count,docid)
 
 def prepareData(tree, root, matches, total):
     global debug
@@ -125,10 +111,10 @@ def writeFile(data, prefix, outFile="sample"):
 def main(argv):
     global debug
 
-    usage = sys.argv[0] + ' -w <word-root> [-i <docList.txt>] [-o <outfile>]'
+    usage = sys.argv[0] + ' -w <word-root> [-i <lorem.csv>] [-o <outfile>]\n'
     root = None
     outFile = None
-    inFile = "docList.txt"
+    inFile = "lorem.csv"
 
     try:
         opts, args = getopt.getopt(argv, "hdi:w:o:", ["ifile"])

@@ -6,11 +6,12 @@
 // process.
 
 var data = new Object();
+var csvfile = 'lorem.csv'
 
 function newSearch(){
     var root= $("#root-search").val();
 
-    var python = window.spawn('python', ['./regex.py', '-w', root, '-i', 'docList.txt']);
+    var python = window.spawn('python', ['./regex.py', '-w', root, '-i', csvfile]);
     var data_string = "";
 
     python.stdout.on('data',function(regex_data){
@@ -18,8 +19,24 @@ function newSearch(){
     });
 
     python.stdout.on('end',function(){
+        // console.log(data_string)
         data = JSON.parse(data_string);
         makeWordTree();
         getSentenceStats();
     });
 }
+
+document.addEventListener('drop', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    for (const f of e.dataTransfer.files) {
+      console.log('File(s) you dragged here: ', f.path)
+      csvfile = f.path;
+    }
+  });
+
+document.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+});
