@@ -19,7 +19,7 @@
   "devDependencies": {
     "d3": "^5.14.0",
     "electron": "^7.1.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jquery.scrollto": "^2.1.2"
   }
 }
